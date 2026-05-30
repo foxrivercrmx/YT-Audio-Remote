@@ -108,13 +108,17 @@ function renderResults(items) {
     items.forEach(item => {
         const div = document.createElement('div');
         div.className = 'item';
+
+        // Bungkus hasil stringify dengan fungsi escapeHTML
+        const safeItemData = escapeHTML(JSON.stringify(item));
+
         div.innerHTML = `
-            <img src="${item.thumbnail || 'https://via.placeholder.com/50'}" alt="cover">
+            <img src="${item.thumbnail || 'https://placehold.co/50'}" alt="cover">
             <div class="item-info">
                 <p class="item-title">${item.title}</p>
                 <p class="item-artist">${item.uploader || item.channel || 'Unknown'}</p>
             </div>
-            <button class="action-btn add" onclick='addToQueueSingle(${JSON.stringify(item)})'>+</button>
+            <button class="action-btn add" onclick='addToQueueSingle(${safeItemData})'>+</button>
         `;
         container.appendChild(div);
     });
@@ -318,4 +322,14 @@ function playNow(id) {
         // Kita beri efek visual sesaat sebelum refresh UI
         setTimeout(fetchQueue, 1000);
     }
+}
+
+// Fungsi untuk menjinakkan karakter sensitif HTML
+function escapeHTML(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;'); // &#39; lebih universal dan stabil dibanding &apos;
 }

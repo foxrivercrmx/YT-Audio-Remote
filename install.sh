@@ -41,7 +41,6 @@ fi
 echo "🚀 Mengambil binary YT Audio Remote..."
 mkdir -p /opt/yt-audio-remote
 cd /opt/yt-audio-remote
-mkdir -p /opt/yt-audio-remote/data
 
 YTAUDIO_URL="https://gitlab.com/denx.bluemonday/yt-audio-remote/-/jobs/artifacts/main/raw/yt-audio-remote?job=build_goke" 
 wget -q --show-progress "$YTAUDIO_URL" -O yt-audio-remote
