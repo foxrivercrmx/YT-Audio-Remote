@@ -1,0 +1,15 @@
+stages:
+  - build
+
+build_goke:
+  stage: build
+  image: golang:1.25-alpine 
+  script:
+    - echo "Mulai merakit YT Audio Remote (Embed & CGO-Free Edition)..."
+    - go mod tidy
+    - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o yt-audio-remote main.go
+    - echo "Build selesai, binary mandiri siap diangkut!"
+  artifacts:
+    paths:
+      - yt-audio-remote
+    expire_in: 1 week

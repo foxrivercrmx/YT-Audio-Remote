@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/img/apple-touch-icon.png">
+    <title>YT Audio Remote</title>
+    <link rel="stylesheet" href="css/index.min.css">
+</head>
+<body>
+    <div id="settings-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:100; align-items:center; justify-content:center;">
+        <div style="background:var(--surface-color); padding:20px; border-radius:10px; width:85%; max-width:400px;">
+            <h3 style="margin-top: 0; border-bottom: 1px solid #444; padding-bottom: 10px;">⚙️ Pengaturan Audio</h3>
+            
+            <div style="margin-bottom:15px;">
+                <label style="color: var(--text-muted); font-size: 0.9rem;">Audio Codec</label>
+                <select id="set-codec" style="width:100%; padding:10px; margin-top:5px; background:#121212; color:white; border:1px solid #444; border-radius:5px;">
+                    <option value="m4a">m4a (Paling Aman untuk STB)</option>
+                    <option value="webm">webm</option>
+                    <option value="opus">opus</option>
+                </select>
+            </div>
+            
+            <div style="margin-bottom:20px;">
+                <label style="color: var(--text-muted); font-size: 0.9rem;">Maksimal Bitrate</label>
+                <select id="set-bitrate" style="width:100%; padding:10px; margin-top:5px; background:#121212; color:white; border:1px solid #444; border-radius:5px;">
+                    <option value="best">Best (Terbaik Tersedia)</option>
+                    <option value="192">192 kbps (Tinggi)</option>
+                    <option value="128">128 kbps (Standar)</option>
+                    <option value="64">64 kbps (Hemat Kuota)</option>
+                </select>
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button onclick="closeSettings()" style="background:transparent; border:1px solid #555;">Batal</button>
+                <button onclick="saveSettings()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <header style="display: flex; gap: 10px; align-items: center;">
+        <div class="search-container" style="flex: 1;">
+            <input type="text" id="searchInput" placeholder="Cari lagu atau paste link YouTube...">
+            <button onclick="handleSearch()">Cari</button>
+        </div>
+        <button onclick="openSettings()" style="background: transparent; font-size: 1.5rem; padding: 5px;">⚙️</button>
+    </header>
+
+    <div id="results-section" style="display: none;">
+        <h3 class="section-title">Hasil Pencarian</h3>
+        <div id="results-list" class="list-container"></div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
+        <h3 class="section-title" style="border: none; margin-bottom: 0;">Antrian Saat Ini</h3>
+        <div style="display: flex; align-items: center;">
+            <span id="refresh-indicator" style="display: none; font-size: 0.8rem; color: var(--primary-color); margin-right: 10px;">
+                Menyegarkan...
+            </span>
+            
+            <button id="btn-refresh" onclick="manualRefresh()" style="background-color: transparent; color: var(--text-main); border: 1px solid #555; padding: 5px 10px; font-size: 0.8rem; margin-right: 10px;">
+                ↻ Segarkan
+            </button>
+            
+            <button onclick="clearQueue()" style="background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; padding: 5px 10px; font-size: 0.8rem;">
+                Kosongkan
+            </button>
+        </div>
+    </div>
+    <div id="queue-list" class="list-container"></div>
+
+    <div class="bottom-bar">
+        <div class="now-playing-info">
+            <span id="np-title">Tidak ada lagu diputar</span>
+        </div>
+        <div class="controls">
+            <input type="range" id="vol-slider" class="volume-slider" min="0" max="100" value="100" onchange="changeVolume(this.value)">
+            <div>
+                <button onclick="sendCommand('PAUSE')">⏸</button>
+                <button onclick="sendCommand('RESUME')" class="main-play">▶</button>
+                <button onclick="sendCommand('NEXT')">⏭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/img/apple-touch-icon.png">
+    <title>YT Audio Player - STB</title>
+    <link rel="stylesheet" href="css/player.min.css">
+</head>
+<body>
+    <div id="start-overlay" onclick="initPlayer()">
+        <h1 class="neon-text">Klik OK / Enter di Remote STB untuk Mulai</h1>
+    </div>
+
+    <audio id="audio-player"></audio>
+
+    <img id="cover" src="https://placehold.co/300x300?text=Menunggu+Antrian..." alt="Cover Art">
+    <h1 id="title" class="song-title">Menunggu Lagu...</h1>
+    <h2 id="artist" class="song-artist">Tidak ada antrian</h2>
+    
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <script src="js/player.min.js"></script>
+</body>
+</html>

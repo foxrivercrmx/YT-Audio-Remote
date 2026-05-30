@@ -1,0 +1,177 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #282828;
+    --primary-color: #1db954;
+    --text-main: #ffffff;
+    --text-muted: #b3b3b3;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 100px;
+    /* Ruang untuk bottom bar */
+}
+
+header {
+    padding: 20px;
+    background-color: var(--surface-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    background-color: #3e3e3e;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.section-title {
+    padding: 0 20px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.list-container {
+    padding: 0 10px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #222;
+}
+
+.item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.item-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.item-title {
+    margin: 0;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-artist {
+    margin: 5px 0 0 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.action-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-muted);
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+.action-btn.add {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.action-btn.delete {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.action-btn.move {
+    border-color: #f39c12;
+    color: #f39c12;
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+/* Bottom Player Bar */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #181818;
+    border-top: 1px solid #282828;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 20;
+}
+
+.now-playing-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.now-playing-info span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    flex: 1;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controls button {
+    background-color: transparent;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.controls button.main-play {
+    background-color: var(--text-main);
+    color: black;
+}
+
+.volume-slider {
+    width: 100px;
+}
