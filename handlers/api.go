@@ -213,10 +213,10 @@ func ReorderQueue(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"status": "ok", "message": "Urutan berhasil diperbarui"})
 }
 
-// ClearQueue menghapus semua lagu yang masih berstatus 'waiting'
+// ClearQueue menghapus semua lagu yang antre, termasuk yang mengalami error
 func ClearQueue(c *fiber.Ctx) error {
-	// GORM: Menghapus massal berdasarkan kondisi
-	if err := database.DB.Where("status = ?", "waiting").Delete(&models.Queue{}).Error; err != nil {
+	// GORM: Menghapus massal lagu dengan status 'waiting' ATAU 'error'
+	if err := database.DB.Where("status IN ?", []string{"waiting", "error"}).Delete(&models.Queue{}).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "Gagal membersihkan antrian"})
 	}
 

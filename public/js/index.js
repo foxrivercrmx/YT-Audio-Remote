@@ -183,7 +183,7 @@ async function fetchQueue() {
 
             // Merakit tombol aksi dinamis
             let actionButtons = '';
-            if (song.Status === 'waiting') {
+            if (song.Status === 'waiting' || song.Status === 'error') {
                 const waitIdx = currentWaitingQueue.findIndex(s => s.ID === song.ID);
 
                 // TOMBOL PLAY NOW BARU

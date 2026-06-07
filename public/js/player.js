@@ -97,6 +97,22 @@ audio.addEventListener('ended', () => {
     }
 });
 
+// Tangkap jika terjadi error pada link stream (misal: expired, koneksi putus)
+audio.addEventListener('error', (e) => {
+    console.error("Terjadi error pada pemutaran stream. Melompat ke lagu berikutnya...", e);
+    // Anggap saja lagu selesai agar backend langsung memutar antrian selanjutnya
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: 'SONG_ENDED' }));
+    }
+});
+
+// (Opsional) Tangkap jika pemutaran macet total karena tidak bisa buffering
+audio.addEventListener('stalled', () => {
+    console.warn("Audio stalled/macet. Menunggu jaringan...");
+    // Kamu bisa bereksperimen melempar SONG_ENDED juga di sini jika dirasa 
+    // stalled-nya tidak pernah bisa pulih. Tapi untuk sekarang kita log saja.
+});
+
 audio.addEventListener('timeupdate', () => {
     if (audio.duration) {
         const percentage = (audio.currentTime / audio.duration) * 100;
